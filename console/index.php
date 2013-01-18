@@ -10,6 +10,8 @@ class Console {
 
   function parse_params($post) {
     file_put_contents($this->output_file, json_encode($post)."\n", FILE_APPEND);
+    if($post["command"] == "clear")
+      file_put_contents($this->output_file, "");
     $this->params = $post;
   }
 
@@ -29,36 +31,38 @@ class Console {
 ?>
     <script type="text/javascript" src="../vendor/jquery-1.9.0.min.js"></script>
     <script type="text/javascript">
-    document.getElementById("console").focus();
+      $("#console").focus();
     </script><?
   }
 
   function render_form() {
     $output = file_get_contents($this->output_file);
-    ?><div id="screen"><?=$output ?></div>
+    ?>
       <form method="post">
       <input type="text" name="command" id="console">
       </form>
-<?
+  <?
   }
 
   function render_output() {
-    $output = file_get_contents($this->output_file);
-    if ($output) { ?>
-      <script type="text/javascript">
-      $("#screen").text('<?=$output?>');
-      </script>
+    $output = explode("\n",file_get_contents($this->output_file)); 
+?>
+    <div id="screen">
+    <? if($output) {
+      foreach ($output as $key => $value) { ?>
+      <?=$value ?>
+    <? } } ?>
+    </div>
     <?
-    }
   }
 }
 
 $console = new Console();
-$console->render_form();
-$console->render_css();
-$console->render_js();
-$console->parse_params($_POST);
 if (count($_POST)>0) {
+  $console->parse_params($_POST);
   $console->run();
   $console->render_output();
 }
+$console->render_form();
+$console->render_css();
+$console->render_js();
