@@ -5,27 +5,24 @@ error_reporting(E_ALL);
 
 class Console {
   
-  function __construct() {
-    $this->output_file = "/tmp/console_output";
-  }
+  public $output_file = "build_output";
+  public $command;
 
   function parse_params($post) {
-    file_put_contents($this->output_file, print_r($post));
-    $this->params = $post;
+    file_put_contents($this->output_file, json_encode($post)."<br>", FILE_APPEND);
+    $this->command = $post["command"];
   }
 
   function run() {
-    print'<pre>';
-    print_r($this->params);
-    print'</pre>';
-    die("+++");    
+    if ($this->command == "clear") 
+      file_put_contents($this->output_file, "");
   }
 
   function render_css() {
     ?>
     <style>
       input { width:1200px; height:40px; font-size: 18px; font-family: Monaco} 
-      #screen { width:1200px; height:600px; font-size: 18px; font-family: Monaco} 
+      #screen { width:1200px; height:400px; font-size: 13px; font-family: Verdana} 
     </style>
     <?
   }
