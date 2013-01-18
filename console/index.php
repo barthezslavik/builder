@@ -8,17 +8,16 @@ class Console {
   }
 
   function render_css() {
-    
+    ?><style>input {width:300px;}</style><?
   }
 
   function render_view() {
-    <<<INPUT
-    <input type="text" id="$id" name="$name" size="$size" placeholder="$placeholder" value="$value">\n
-    INPUT;
+    ?><input type="text" name="command"><?
   }
 }
 
 $console = new Console();
 $console->render_view();
+$console->render_css();
 $console->parse_params($_POST);
 
