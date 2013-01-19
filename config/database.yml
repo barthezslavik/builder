@@ -1,13 +1,11 @@
 development:
-  adapter: mysql2
-  encoding: utf8
+  host: localhost
   database: builder_development
   username: root
   password:
 
 production:
-  adapter: mysql2
-  encoding: utf8
+  host: localhost
   database: builder_production
   username: root
   password:
