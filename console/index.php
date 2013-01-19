@@ -38,19 +38,39 @@ class Console {
         "g scaffold", "g model", "g controller",
       ]
       $("#console").focus();
+
+      var history = $("#screen").html().split("<br>");
+      history = history.slice(0, history.length-1);
+      var cursor = history.length;
+
       $("#console").keyup(function(e) {
         console.log(e.keyCode);
-        if (e.keyCode == 40) {
-          variants = $("#autocomplete").find("div");
-          console.log(variants);
-        } else {
-          var current_value = $("#console").val();
-          $.each(variants, function(index, value) {
-            //console.log(current_value, value);
-            if (value.match(current_value)) {
-              console.log(value);
+        switch(e.keyCode) {
+          case 8: {
+            variants = $("#autocomplete").find("div");
+            console.log(variants);
+          }
+
+          case 40: {
+            variants = $("#autocomplete").find("div");
+            console.log(variants);
+          }
+
+          case 38: {
+            if (cursor > 0) { 
+              cursor--;
+              $(this).val(history[cursor]);
             }
-          });
+          }
+
+          default: {
+            var current_value = $("#console").val();
+            $.each(variants, function(index, value) {
+              if (value.match(current_value)) {
+                console.log(value);
+              }
+            });
+          }
         }
       });
     });
@@ -70,12 +90,7 @@ class Console {
   function render_output() {
     $output = explode("\n",file_get_contents($this->output_file)); 
 ?>
-    <div id="screen">
-    <? if($output) {
-      foreach ($output as $key => $value) { ?>
-      <?=$value ?>
-    <? } } ?>
-    </div>
+    <div id="screen"><? if($output) {foreach ($output as $key => $value) { ?><?=$value ?><? } } ?></div>
     <?
   }
 }
