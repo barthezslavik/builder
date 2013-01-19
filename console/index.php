@@ -9,7 +9,9 @@ class Console {
   public $params;
 
   function parse_params($post) {
-    file_put_contents($this->output_file, json_encode($post)."\n", FILE_APPEND);
+
+    if($post["command"] != "") 
+      file_put_contents($this->output_file, $post["command"]."<br>", FILE_APPEND);
     if($post["command"] == "clear")
       file_put_contents($this->output_file, "");
     $this->params = $post;
@@ -31,7 +33,27 @@ class Console {
 ?>
     <script type="text/javascript" src="../vendor/jquery-1.9.0.min.js"></script>
     <script type="text/javascript">
+    $(document).ready(function() {
+      variants = [
+        "g scaffold", "g model", "g controller",
+      ]
       $("#console").focus();
+      $("#console").keyup(function(e) {
+        console.log(e.keyCode);
+        if (e.keyCode == 40) {
+          variants = $("#autocomplete").find("div");
+          console.log(variants);
+        } else {
+          var current_value = $("#console").val();
+          $.each(variants, function(index, value) {
+            //console.log(current_value, value);
+            if (value.match(current_value)) {
+              console.log(value);
+            }
+          });
+        }
+      });
+    });
     </script><?
   }
 
@@ -40,6 +62,7 @@ class Console {
     ?>
       <form method="post">
       <input type="text" name="command" id="console">
+      <div id="autocomplete"></div>
       </form>
   <?
   }
