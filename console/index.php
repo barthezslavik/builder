@@ -20,79 +20,30 @@ class Console {
   function run() {
   }
 
-  function render_css() {
-?>
+  function render_css() { ?>
     <style>
       input { width:1200px; height:40px; font-size: 18px; font-family: Monaco} 
       #screen { width:1200px; height:400px; font-size: 14px; font-family: Verdana} 
     </style>
-<?
-  }
+<? }
 
-  function render_js() {
-?>
+  function render_js() { ?>
     <script type="text/javascript" src="../vendor/jquery-1.9.0.min.js"></script>
-    <script type="text/javascript">
-    $(document).ready(function() {
-      variants = [
-        "g scaffold", "g model", "g controller",
-      ]
-      $("#console").focus();
-
-      var history = $("#screen").html().split("<br>");
-      history = history.slice(0, history.length-1);
-      var cursor = history.length;
-
-      $("#console").keyup(function(e) {
-        console.log(e.keyCode);
-        switch(e.keyCode) {
-          case 8: {
-            variants = $("#autocomplete").find("div");
-            console.log(variants);
-          }
-
-          case 40: {
-            variants = $("#autocomplete").find("div");
-            console.log(variants);
-          }
-
-          case 38: {
-            if (cursor > 0) { 
-              cursor--;
-              $(this).val(history[cursor]);
-            }
-          }
-
-          default: {
-            var current_value = $("#console").val();
-            $.each(variants, function(index, value) {
-              if (value.match(current_value)) {
-                console.log(value);
-              }
-            });
-          }
-        }
-      });
-    });
-    </script><?
-  }
+    <script type="text/javascript" src="console.js"></script>
+<? }
 
   function render_form() {
-    $output = file_get_contents($this->output_file);
-    ?>
+    $output = file_get_contents($this->output_file); ?>
       <form method="post">
       <input type="text" name="command" id="console">
       <div id="autocomplete"></div>
       </form>
-  <?
-  }
+  <? }
 
   function render_output() {
-    $output = explode("\n",file_get_contents($this->output_file)); 
-?>
+    $output = explode("\n",file_get_contents($this->output_file));?>
     <div id="screen"><? if($output) {foreach ($output as $key => $value) { ?><?=$value ?><? } } ?></div>
-    <?
-  }
+  <? }
 }
 
 $console = new Console();
