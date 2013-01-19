@@ -1,5 +1,5 @@
 <?php
-require_once "ActiveRecord.php";
+require_once "config/initializers/ActiveRecord.php";
 
 class Book extends ActiveRecord\Model { }
 
