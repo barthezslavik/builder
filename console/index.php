@@ -3,10 +3,12 @@
 ini_set('display_errors', "on");
 error_reporting(E_ALL);
 
+require "generator.php";
+
 class Console {
 
   public $output_file = "build_output";
-  public $params;
+  public $command;
 
   function parse_params($post) {
 
@@ -14,10 +16,13 @@ class Console {
       file_put_contents($this->output_file, $post["command"]."<br>", FILE_APPEND);
     if($post["command"] == "clear")
       file_put_contents($this->output_file, "");
-    $this->params = $post;
+    $this->command = $post["command"];
   }
 
   function run() {
+    if($this->command == "c") {
+      Generator::create_database();
+    }
   }
 
   function render_css() { ?>
