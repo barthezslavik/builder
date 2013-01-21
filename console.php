@@ -2,12 +2,14 @@
 
 ini_set('display_errors', "on");
 error_reporting(E_ALL);
+require_once "config/initializers/ActiveRecord.php";
+require_once "lib/Spyc.php";
+require_once "console/generator.php";
 
-require "generator.php";
 
 class Console {
 
-  public $output_file = "build_output";
+  public $output_file = "console/build_output";
   public $command;
 
   function parse_params($post) {
@@ -32,23 +34,23 @@ class Console {
     </style>
 <? }
 
-  function render_js() { ?>
+function render_js() { ?>
     <script type="text/javascript" src="../vendor/jquery-1.9.0.min.js"></script>
     <script type="text/javascript" src="console.js"></script>
 <? }
 
-  function render_form() {
-    $output = file_get_contents($this->output_file); ?>
+function render_form() {
+  $output = file_get_contents($this->output_file); ?>
       <form method="post">
       <input type="text" name="command" id="console">
       <div id="autocomplete"></div>
       </form>
-  <? }
+<? }
 
-  function render_output() {
-    $output = explode("\n",file_get_contents($this->output_file));?>
+function render_output() {
+  $output = explode("\n",file_get_contents($this->output_file));?>
     <div id="screen"><? if($output) {foreach ($output as $key => $value) { ?><?=$value ?><? } } ?></div>
-  <? }
+<? }
 }
 
 $console = new Console();

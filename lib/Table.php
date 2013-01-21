@@ -81,6 +81,7 @@ class Table
 		$connection = $this->class->getStaticPropertyValue('connection',null);
 
 		$this->conn = ConnectionManager::get_connection($connection);
+print_r($this);
 		$this->set_table_name();
 		$this->get_meta_data();
 		$this->set_primary_key();
@@ -201,6 +202,7 @@ class Table
 
 	public function find_by_sql($sql, $values=null, $readonly=false, $includes=null)
 	{
+
 		$this->last_sql = $sql;
 
 		$collect_attrs_for_includes = is_null($includes) ? false : true;
