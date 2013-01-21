@@ -200,9 +200,12 @@ abstract class Connection
 				$host = "unix_socket=$info->host";
 
 			$this->connection = new PDO("$info->protocol:$host;dbname=$info->db",$info->user,$info->pass,static::$PDO_OPTIONS);
-		} catch (PDOException $e) {
-			throw new DatabaseException($e);
-		}
+                } catch (PDOException $e) {
+                        $connect = mysql_connect($info->host,$info->user,$info->pass);
+                        mysql_query("CREATE DATABASE $info->db",$connect);
+			$this->connection = new PDO("$info->protocol:$host;dbname=$info->db",$info->user,$info->pass,static::$PDO_OPTIONS);
+                        //throw new DatabaseException($e);
+                }
 	}
 
 	/**

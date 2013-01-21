@@ -5,7 +5,13 @@ error_reporting(E_ALL);
 require_once "config/initializers/ActiveRecord.php";
 require_once "lib/Spyc.php";
 require_once "console/generator.php";
+$database = Spyc::YAMLLoad('config/database.yml');
+$development = 'mysql://'.$database["development"]["username"].':'.$database["development"]["password"].'@'.$database["development"]["host"].'/'.$database["development"]["database"];
 
+ActiveRecord\Config::initialize(function($cfg) use ($development) {
+  $cfg->set_model_directory('app/models');
+  $cfg->set_connections(array('development' => $development));
+});
 
 class Console {
 
@@ -22,9 +28,7 @@ class Console {
   }
 
   function run() {
-    if($this->command == "c") {
-      Generator::create_database();
-    }
+    ActiveRecord\ConnectionManager::get_connection();
   }
 
   function render_css() { ?>
