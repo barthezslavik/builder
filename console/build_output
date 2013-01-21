@@ -1,1 +1,1 @@
-1<br>2<br>
+scaffold Post title:string content:text<br>scaffold Post title:string content:text<br>scaffold User title:string content:text<br>

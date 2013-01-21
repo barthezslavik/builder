@@ -2,9 +2,12 @@ $(document).ready(function() {
   variants = ["g scaffold", "g model", "g controller"]
   $("#console").focus();
 
-  var history = $("#screen").html().split("<br>");
-  history = history.slice(0, history.length-1);
-  var cursor = history.length;
+  var history = $("#screen").html();
+  if (history) {
+    history = history.split("<br>");
+    history = history.slice(0, history.length-1);
+    var cursor = history.length;
+  }
 
   $("#console").keyup(function(e) {
     console.log(e.keyCode);

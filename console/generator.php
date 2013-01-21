@@ -6,6 +6,6 @@ error_reporting(E_ALL);
 
 class Generator {
   function create_scaffold() {
-  
+     
   }
 }
