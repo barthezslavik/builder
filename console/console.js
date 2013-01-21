@@ -12,8 +12,6 @@ $(document).ready(function() {
   $("#console").keyup(function(e) {
     console.log(e.keyCode);
     switch(e.keyCode) {
-      case 8: {
-      }
 
       case 40: {
         variants = $("#autocomplete").find("div");
