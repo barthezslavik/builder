@@ -35,33 +35,21 @@ class Console {
 
   function run() {
     $params = explode(" ",$this->command);
-    if ($params[0] == "scaffold") {
-      
-      $table_name = ActiveRecord\Inflector::instance()->tableize($params[1]);
-      $fields = array_slice($params, 2);
+    if ($params[0] == "s") {
+      //$table_name = ActiveRecord\Inflector::instance()->tableize($params[1]);
+      //ActiveRecord\Mirgation::create_file($table_name)
+    }
 
+    if ($params[0] == "m") {
       require "db/migrate/20121220145904_create_samples.php";
       $migration = new CreateSamples();
       $migration->up();
+    }
 
-      /*
-      $columns = "`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY";
-      
-      foreach($fields as $value) {
-        $info = explode(":",$value);
-        if ($info) {
-          if($info[1] == "string") { $columns .= ", `{$info[0]}` VARCHAR( 255 ) NOT NULL"; }
-          if($info[1] == "text") { $columns .= ", `{$info[0]}` TEXT NOT NULL"; }
-          if($info[1] == "integer") { $columns .= ", `{$info[0]}` INTEGER"; }
-          if($info[1] == "boolean") { $columns .= ", `{$info[0]}` TINYINT(1)"; }
-        }
-      }
-
-      $this->connection->query(
-        "CREATE TABLE IF NOT EXISTS `{$table_name}` ({$columns})
-        ");
-       */
-
+    if ($params[0] == "d") {
+      require "db/migrate/20121220145904_create_samples.php";
+      $migration = new CreateSamples();
+      $migration->down();
     }
   }
 
