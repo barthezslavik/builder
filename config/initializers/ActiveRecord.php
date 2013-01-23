@@ -14,6 +14,7 @@ require 'lib/ConnectionManager.php';
 require 'lib/Connection.php';
 require 'lib/SQLBuilder.php';
 require 'lib/Reflections.php';
+require 'lib/Migration.php';
 require 'lib/Inflector.php';
 require 'lib/CallBack.php';
 require 'lib/Exceptions.php';

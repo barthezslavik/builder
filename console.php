@@ -36,8 +36,14 @@ class Console {
   function run() {
     $params = explode(" ",$this->command);
     if ($params[0] == "scaffold") {
+      
       $table_name = ActiveRecord\Inflector::instance()->tableize($params[1]);
       $fields = array_slice($params, 2);
+
+      require "db/migrate/20121220145904_create_samples.php";
+      CreateSamples::up();
+
+      /*
       $columns = "`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY";
       
       foreach($fields as $value) {
@@ -52,7 +58,9 @@ class Console {
 
       $this->connection->query(
         "CREATE TABLE IF NOT EXISTS `{$table_name}` ({$columns})
-      ");
+        ");
+       */
+
     }
   }
 

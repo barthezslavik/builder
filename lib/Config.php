@@ -105,9 +105,13 @@ class Config extends Singleton
 	 * @return void
 	 */
 	public static function initialize(Closure $initializer)
-	{
-		$initializer(parent::instance());
-	}
+        {
+
+
+          $initializer(parent::instance());
+
+        }
+
 
 	/**
 	 * Sets the list of database connection strings.
@@ -130,7 +134,7 @@ class Config extends Singleton
 		if ($default_connection)
 			$this->set_default_connection($default_connection);
 
-		$this->connections = $connections;
+                $this->connections = $connections;
 	}
 
 	/**
@@ -197,7 +201,7 @@ class Config extends Singleton
 	 * @throws ConfigException if specified directory was not found
 	 */
 	public function set_model_directory($dir)
-	{
+        {
 		if (!file_exists($dir))
 			throw new ConfigException("Invalid or non-existent directory: $dir");
 
