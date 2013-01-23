@@ -31,4 +31,3 @@ class Migration extends Singleton {
   }
 
 }
-

@@ -46,7 +46,7 @@ class Console {
       $migration->up();
     }
 
-    if ($params[0] == "d") {
+    if ($params[0] == "b") {
       require "db/migrate/20121220145904_create_samples.php";
       $migration = new CreateSamples();
       $migration->down();
