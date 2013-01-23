@@ -1,15 +1,10 @@
 <?php
-class CreateSamples {
-  static function up() {
-    ActiveRecord\Migration::create_table(function($t) {
-      $t->table("samples");
-      $t->string("name");
-      $t->text("description");
-      $t->datetime();
-    });
+class CreateSamples extends ActiveRecord\Migration {
+  function up() {
+    $this->create_table("samples", "string:name", "text:description", "datetime");
   }
 
-  static function down() {
-    ActiveRecord\Migration::drop_table("samples");
+  function down() {
+    $this->drop_table("samples");
   }
 }

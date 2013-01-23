@@ -1,31 +1,19 @@
 <?php
 namespace ActiveRecord;
-use Closure;
 
 class Migration extends Singleton {
-  public static function create_table(Closure $initializer) {
-    $initializer(parent::instance());
-  }
 
-  function table($table) {
-    $this->table = $table;
+  function __construct() {
     $this->connection = ConnectionManager::get_connection();
   }
 
-  function string($name) {
-    $this->fileds[] = "string".$name;
+  function create_table() {
+    
   }
 
-  function text($name) {
-    $this->text = $name;
+  function drop_table() {
   }
 
-  function datetime() {
-  print'<pre>';
-  print_r($this);
-  print'</pre>';
-  die("+++");
-  }
 }
 
   /*static function execute() {
@@ -45,39 +33,3 @@ class Migration extends Singleton {
       ");
   }*/
 
-/*
-class Config extends Singleton
-{
-
-        private $default_connection = 'development';
-
-        private $connections = array();
-
-        private $model_directory;
-
-        private $logging = false;
-
-        private $logger;
-
-        private $date_format = \DateTime::ISO8601;
-
-        public static function create_table(Closure $initializer)
-        {
-
-
-          $initializer(parent::instance());
-
-        }
-
-
-        public function set_connections($connections, $default_connection=null)
-        {
-                if (!is_array($connections))
-                        throw new ConfigException("Connections must be an array");
-
-                if ($default_connection)
-                        $this->set_default_connection($default_connection);
-
-                $this->connections = $connections;
-
-};*/

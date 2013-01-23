@@ -41,7 +41,8 @@ class Console {
       $fields = array_slice($params, 2);
 
       require "db/migrate/20121220145904_create_samples.php";
-      CreateSamples::up();
+      $migration = new CreateSamples();
+      $migration->up();
 
       /*
       $columns = "`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY";
