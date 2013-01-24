@@ -1,0 +1,8 @@
+<? $f = new Form($this->{model}, "method:post") ?>
+<? $f->input("title", "placeholder:Enter title") ?>
+    <br><br>
+<? $f->input("content", "as:text") ?>
+    <br><br>
+<? $f->association("user", "prompt:Select user") ?>
+    <br><br>
+<? $f->button("submit") ?>

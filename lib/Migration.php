@@ -12,7 +12,7 @@ class Migration extends Singleton {
     $data = func_get_args();
     $table_name = $data[0];
     $fields = array_slice($data,1);
-    $query = "`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY";
+    $query = "`id` INT NOT NULL AUTO_INCREMENT PRIMARY KEY"; 
     foreach($fields as $value) {
       $info = explode(":",$value);
       if ($info) {

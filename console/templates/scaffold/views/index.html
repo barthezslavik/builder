@@ -1,0 +1,25 @@
+<h2>Listing {plural}</h2>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Content</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <? if (count($this->{plural}) > 0) : ?>
+    <? foreach($this->{plural} as ${model}) : ?>
+    <tr>
+      <td><?=${model}->title ?></td>
+      <td><?=${model}->content ?></td>
+      <td><a href="/{plural}/<?=${model}->id?>">Show</a></td>
+      <td><a href="/{plural}/<?=${model}->id?>/edit">Edit</a></td>
+      <td><a href="/{plural}/<?=${model}->id?>/delete">Delete</a></td>
+    </tr>
+    <? endforeach ?>
+  <? endif ?>
+</table>
+
+<br />
+
+<a href="/posts/new">New {capital}</a>
