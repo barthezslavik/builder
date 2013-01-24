@@ -8,6 +8,7 @@ class Migration extends Singleton {
   }
 
   function create_table() {
+
     $data = func_get_args();
     $table_name = $data[0];
     $fields = array_slice($data,1);

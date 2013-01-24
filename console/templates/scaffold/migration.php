@@ -1,7 +1,7 @@
 <?php
-class Create{table} extends ActiveRecord\Migration {
+class Create{model} extends ActiveRecord\Migration {
   function up() {
-    $this->create_table("{table}", "{columns_with_types}", "datetime");
+    $this->create_table("{table}", {columns_with_types}, "datetime");
   }
 
   function down() {
