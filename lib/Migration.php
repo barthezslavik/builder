@@ -16,11 +16,11 @@ class Migration extends Singleton {
     foreach($fields as $value) {
       $info = explode(":",$value);
       if ($info) {
-        if($info[0] == "string") { $query .= ", `{$info[1]}` VARCHAR( 255 ) NOT NULL"; }
-        if($info[0] == "text") { $query .= ", `{$info[1]}` TEXT NOT NULL"; }
-        if($info[0] == "integer") { $query .= ", `{$info[1]}` INTEGER"; }
-        if($info[0] == "boolean") { $query .= ", `{$info[1]}` TINYINT(1)"; }
-        if($info[0] == "datetime") { $query .= ", `created_at` DATETIME, `updated_at` DATETIME"; }
+        if($info[1] == "string") { $query .= ", `{$info[0]}` VARCHAR( 255 ) NOT NULL"; }
+        if($info[1] == "text") { $query .= ", `{$info[0]}` TEXT NOT NULL"; }
+        if($info[1] == "integer") { $query .= ", `{$info[0]}` INTEGER"; }
+        if($info[1] == "boolean") { $query .= ", `{$info[0]}` TINYINT(1)"; }
+        if($info[1] == "datetime") { $query .= ", `created_at` DATETIME, `updated_at` DATETIME"; }
       }
     }
 

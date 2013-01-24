@@ -22,6 +22,7 @@ class Console {
 
   function __construct() {
     $this->connection = ActiveRecord\ConnectionManager::get_connection();
+    $this->generator = new Generator();
   }
 
   function parse_params($post) {
@@ -35,21 +36,19 @@ class Console {
 
   function run() {
     $params = explode(" ",$this->command);
-    if ($params[0] == "s" || "scaffold") {
-      $generator = new Generator();
-      $generator->create_scaffold($params);
+    if ($params[0] == "s" || $params[0] == "scaffold") {
+      $this->generator->create_scaffold($params);
     }
 
     if ($params[0] == "m") {
-      require "db/migrate/20121220145904_create_samples.php";
-      $migration = new CreateSamples();
-      $migration->up();
+      require "db/migrate/20121220145905_create_schema_migration.php";
+      $create_schema = new CreateSchemaMigration();
+      $create_schema->up();
+      $schema_migration = new SchemaMigration(array('version' => 'Tito'));
+      $schema_migration->save(); 
     }
 
     if ($params[0] == "b") {
-      require "db/migrate/20121220145904_create_samples.php";
-      $migration = new CreateSamples();
-      $migration->down();
     }
   }
 

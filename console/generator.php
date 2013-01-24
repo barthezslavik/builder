@@ -1,8 +1,5 @@
 <?php 
 
-ini_set('display_errors', "on");
-error_reporting(E_ALL);
-
 class Generator {
   function create_migration($params) {
     $lines = explode("\n",file_get_contents("console/templates/scaffold/migration.php"));
