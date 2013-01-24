@@ -35,9 +35,9 @@ class Console {
 
   function run() {
     $params = explode(" ",$this->command);
-    if ($params[0] == "s") {
-      //$table_name = ActiveRecord\Inflector::instance()->tableize($params[1]);
-      //ActiveRecord\Mirgation::create_file($table_name)
+    if ($params[0] == "s" || "scaffold") {
+      $generator = new Generator();
+      $generator->create_scaffold($params);
     }
 
     if ($params[0] == "m") {
