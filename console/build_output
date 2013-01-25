@@ -1,1 +1,1 @@
-scaffold user name:string<br>scaffold user name:string<br>scaffold user name:string<br>scaffold user name:string<br>scaffold user name:string<br>
+s post name:string content:text<br>m<br>m<br>m<br>m<br>m<br>s user name:string<br>s post name:string content:text<br>s article name:string status:integer<br>s star status:boolean<br>m<br>m<br>

@@ -15,6 +15,8 @@ ActiveRecord\Config::initialize(function($cfg) use ($development) {
   $cfg->set_connections(array('development' => $development));
 });
 
+class SchemaMigration extends ActiveRecord\Model {}
+
 class Console {
 
   public $output_file = "console/build_output";
@@ -42,11 +44,22 @@ class Console {
     }
 
     if ($params[0] == "m") {
-      require "db/migrate/20121220145905_create_schema_migration.php";
-      $create_schema = new CreateSchemaMigration();
-      $create_schema->up();
-      $schema_migration = new SchemaMigration(array('version' => 'Tito'));
-      $schema_migration->save(); 
+      $files = scandir("db/migrate");
+      $files = array_slice($files, 2);
+      foreach($files as $file) {
+        $version = explode("_", $file)[0];
+        $schema_migration = SchemaMigration::find_by_version($version);
+        if ($schema_migration == NULL) {
+          $classes = get_declared_classes();
+          require "db/migrate/{$file}";
+          $diff = array_diff(get_declared_classes(), $classes);
+          $class = reset($diff);
+          $migration_class = new $class;
+          $migration_class->up();
+          $schema_migration = new SchemaMigration(array("version" => $version));
+          $schema_migration->save();
+        }
+      }
     }
 
     if ($params[0] == "b") {

@@ -8,7 +8,6 @@ class Migration extends Singleton {
   }
 
   function create_table() {
-
     $data = func_get_args();
     $table_name = $data[0];
     $fields = array_slice($data,1);
@@ -16,11 +15,13 @@ class Migration extends Singleton {
     foreach($fields as $value) {
       $info = explode(":",$value);
       if ($info) {
-        if($info[1] == "string") { $query .= ", `{$info[0]}` VARCHAR( 255 ) NOT NULL"; }
-        if($info[1] == "text") { $query .= ", `{$info[0]}` TEXT NOT NULL"; }
-        if($info[1] == "integer") { $query .= ", `{$info[0]}` INTEGER"; }
-        if($info[1] == "boolean") { $query .= ", `{$info[0]}` TINYINT(1)"; }
-        if($info[1] == "datetime") { $query .= ", `created_at` DATETIME, `updated_at` DATETIME"; }
+        if(count($info)>1) {
+          if($info[1] == "string") { $query .= ", `{$info[0]}` VARCHAR( 255 ) NOT NULL"; }
+          if($info[1] == "text") { $query .= ", `{$info[0]}` TEXT NOT NULL"; }
+          if($info[1] == "integer") { $query .= ", `{$info[0]}` INTEGER"; }
+          if($info[1] == "boolean") { $query .= ", `{$info[0]}` TINYINT(1)"; }
+        }
+        if($info[0] == "datetime") { $query .= ", `created_at` DATETIME, `updated_at` DATETIME"; }
       }
     }
 

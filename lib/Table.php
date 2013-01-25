@@ -81,7 +81,6 @@ class Table
 		$connection = $this->class->getStaticPropertyValue('connection',null);
 
 		$this->conn = ConnectionManager::get_connection($connection);
-print_r($this);
 		$this->set_table_name();
 		$this->get_meta_data();
 		$this->set_primary_key();
