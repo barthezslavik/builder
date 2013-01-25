@@ -2,24 +2,30 @@
 
 class Generator {
   function create_migration($params) {
-    $lines = explode("\n",file_get_contents("console/templates/scaffold/migration.php"));
-    $table = ActiveRecord\Inflector::instance()->tableize($params[1]);
-    $model = ucfirst($table);
+    $this->lines = explode("\n",file_get_contents("console/templates/scaffold/migration.php"));
+    $this->table = ActiveRecord\Inflector::instance()->tableize($params[1]);
+    $this->model = ucfirst($this->table);
     $params = array_slice($params,2);
-    $columns_with_types = '"'.join('", "', $params).'"';
-    foreach($lines as $num => $line) {
-      $lines[$num] = str_replace("{model}",$model, $lines[$num]);
-      $lines[$num] = str_replace("{table}",$table, $lines[$num]);
-      $lines[$num] = str_replace("{columns_with_types}", $columns_with_types, $lines[$num]);
-      $lines[$num] .= "\n"; 
-    } 
-    $file_name = "db/migrate/".date('Ydmhis')."_create_{$table}.php";
-    file_put_contents($file_name, $lines);
+    $this->columns_with_types = '"'.join('", "', $params).'"';
+    $this->replace_template("model","table","columns_with_types");
+    $file_name = "db/migrate/".date('Ydmhis')."_create_{$this->table}.php";
+    file_put_contents($file_name, $this->lines);
     chmod($file_name,0777);
     print "create migration ".$file_name."\n";
   }
 
   function create_scaffold($params) {
      $this->create_migration($params);
+     //$this->create_($params);
+  }
+
+  private function replace_template() {
+    $args = func_get_args();
+    foreach($this->lines as $num => $line) {
+      foreach($args as $name) {
+        @$this->lines[$num] = str_replace("@".$name, $this->${name}, $this->lines[$num]);
+      }
+      $this->lines[$num] .= "\n"; 
+    }
   }
 }

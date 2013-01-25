@@ -203,6 +203,7 @@ abstract class Connection
                 } catch (PDOException $e) {
                         $connect = mysql_connect($info->host,$info->user,$info->pass);
                         mysql_query("CREATE DATABASE $info->db",$connect);
+                        mysql_query("CREATE TABLE `{$info->db}`.`schema_migrations` (`version` VARCHAR( 255 ) NOT NULL , UNIQUE (`version`))", $connect);
 			$this->connection = new PDO("$info->protocol:$host;dbname=$info->db",$info->user,$info->pass,static::$PDO_OPTIONS);
                         //throw new DatabaseException($e);
                 }

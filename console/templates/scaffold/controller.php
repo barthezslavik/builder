@@ -37,7 +37,7 @@ class {name}Controller extends Controller {
       $this->redirect_to("index");
   }
 
-  function build() {
+  function add() {
     $this->{model} = new {capital};
   }
 }

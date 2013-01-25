@@ -23,6 +23,7 @@ class Console {
   function __construct() {
     $this->connection = ActiveRecord\ConnectionManager::get_connection();
     $this->generator = new Generator();
+    $this->models = array("book, schema_migration");
   }
 
   function parse_params($post) {
@@ -54,8 +55,8 @@ class Console {
 
   function render_css() { ?>
     <style>
-      input { width:1200px; height:40px; font-size: 18px; font-family: Monaco} 
-      #screen { width:1200px; height:400px; font-size: 14px; font-family: Verdana} 
+      input { width:650px; height:25px; font-size: 14px; font-family: Monaco} 
+      #screen { width:650px; height:400px; font-size: 12px; font-family: Verdana; background: #e3e3ea;} 
     </style>
 <? }
 
@@ -72,6 +73,10 @@ function render_form() {
       </form>
 <? }
 
+function render_structure() {
+  print_r(json_encode($this->models));
+}
+
 function render_output() {
   $output = explode("\n",file_get_contents($this->output_file));?>
     <div id="screen"><? if($output) {foreach ($output as $key => $value) { ?><?=$value ?><? } } ?></div>
@@ -85,5 +90,6 @@ if (count($_POST)>0) {
 }
 $console->render_output();
 $console->render_form();
+$console->render_structure();
 $console->render_css();
 $console->render_js();
