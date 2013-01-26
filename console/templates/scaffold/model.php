@@ -1,6 +1,6 @@
 <?php
 
-class {model} extends ActiveRecord\Model { 
+class @model extends ActiveRecord\Model { 
 
 }
 
