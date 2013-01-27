@@ -1,0 +1,155 @@
+body {
+  background-color: #4B7399;
+  font-family: Verdana, Helvetica, Arial;
+  font-size: 14px;
+}
+
+a img {
+  border: none;
+}
+
+a {
+  color: #0000FF;
+}
+
+pre {
+  padding:0;
+  margin:0;
+}
+
+.clear {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+}
+
+#container {
+  width: 1000px;
+  margin: 0 auto;
+  background-color: #FFF;
+  padding: 20px 40px;
+  border: solid 1px black;
+  margin-top: 20px;
+  overflow: auto;
+}
+
+#flash_notice, #flash_error, #flash_alert {
+  padding: 5px 8px;
+  margin: 10px 0;
+}
+
+#flash_notice {
+  background-color: #CFC;
+  border: solid 1px #6C6;
+}
+
+#flash_error, #flash_alert {
+  background-color: #FCC;
+  border: solid 1px #C66;
+}
+
+.fieldWithErrors {
+  display: inline;
+}
+
+.error_messages {
+  width: 400px;
+  border: 2px solid #CF0000;
+  padding: 0px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  font-size: 12px;
+}
+
+.error_messages h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 10px;
+  font-size: 12px;
+  margin: 0;
+  background-color: #c00;
+  color: #fff;
+}
+
+.error_messages p {
+  margin: 8px 10px;
+}
+
+.error_messages ul {
+  margin: 0;
+}
+
+input[type="text"], input[type="password"], input[type="email"], textarea, select {
+  border: 1px solid #b3b3b3;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -o-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -khtml-border-radius: 5px;
+  border-radius: 5px;
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) inset, 0 1px 0 white;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) inset, 0 1px 0 white;
+  -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) inset, 0 1px 0 white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) inset, 0 1px 0 white;
+  padding: 5px;
+}
+
+label, input[type="button"], input[type="submit"], input[type="image"], button {
+  cursor: pointer;
+}
+
+button, input, select, textarea {
+  width: auto;
+  overflow: visible;
+  margin: 0;
+  font-size: 100%;
+  font-family: sans-serif;
+  vertical-align: baseline;
+}
+
+textarea {
+  overflow: auto;
+  vertical-align: text-top;
+}
+
+input::-moz-focus-inner,
+button::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+label {
+  font-size: 12px;
+  font-weight: bold;
+  float: left;
+  width: 150px;
+  margin: 5px 10px 4px 0;
+}
+
+#left_column {
+  float:left;
+  overflow: auto;
+  width: 300px;
+}
+
+#center_column {
+  float:left;
+  width: 300px;
+  margin-left: 20px;
+}
+
+#right_column {
+  float:left;
+  width: 300px;
+  margin-left: 20px;
+}
+
+ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+li {
+  list-style-type: none;
+}

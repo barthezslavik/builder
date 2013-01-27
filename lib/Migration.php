@@ -1,6 +1,6 @@
 <?php
 namespace ActiveRecord;
-class SchemaMigration extends ActiveRecord\Model {}
+class SchemaMigration extends Model {}
 
 class Migration {
 
