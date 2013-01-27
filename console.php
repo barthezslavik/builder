@@ -1,5 +1,5 @@
 <?php 
-
+//=======================init section ========================================//
 ini_set('display_errors', "on");
 error_reporting(E_ALL);
 
@@ -17,6 +17,7 @@ ActiveRecord\Config::initialize(function($cfg) use ($development) {
 
 class SchemaMigration extends ActiveRecord\Model {}
 
+//====================== Console class ==========================================//
 class Console {
 
   public $output_file = "console/build_output";
@@ -65,6 +66,8 @@ class Console {
     }
   }
 }
+
+// ========================== Page generation ===================================//
 
 $console = new Console();
 if (count($_POST)>0) {
