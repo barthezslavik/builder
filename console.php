@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 
 require_once "config/initializers/ActiveRecord.php";
 require_once "lib/Spyc.php";
-require_once "console/generator.php";
+require_once "lib/Generator.php";
 
 $database = Spyc::YAMLLoad('config/database.yml');
 $development = 'mysql://'.$database["development"]["username"].':'.$database["development"]["password"].'@'.$database["development"]["host"].'/'.$database["development"]["database"];
@@ -25,7 +25,6 @@ class Console {
   function __construct() {
     $this->connection = ActiveRecord\ConnectionManager::get_connection();
     $this->generator = new Generator();
-    $this->models = array("book, schema_migration");
   }
 
   function parse_params($post) {
@@ -87,7 +86,7 @@ function render_form() {
 <? }
 
 function render_structure() {
-  print_r(json_encode($this->models));
+  $this->generator->models_structure();
 }
 
 function render_output() {
