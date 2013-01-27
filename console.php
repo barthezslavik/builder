@@ -64,35 +64,6 @@ class Console {
     if ($params[0] == "b") {
     }
   }
-
-  function render_css() { ?>
-    <style>
-      input { width:650px; height:25px; font-size: 14px; font-family: Monaco} 
-      #screen { width:650px; height:400px; font-size: 12px; font-family: Verdana; background: #e3e3ea;} 
-    </style>
-<? }
-
-function render_js() { ?>
-    <script type="text/javascript" src="vendor/jquery-1.9.0.min.js"></script>
-    <script type="text/javascript" src="console/console.js"></script>
-<? }
-
-function render_form() {
-  $output = file_get_contents($this->output_file); ?>
-      <form method="post">
-      <input type="text" name="command" id="console">
-      <div id="autocomplete"></div>
-      </form>
-<? }
-
-function render_structure() {
-  $this->generator->models_structure();
-}
-
-function render_output() {
-  $output = explode("\n",file_get_contents($this->output_file));?>
-    <div id="screen"><? if($output) {foreach ($output as $key => $value) { ?><?=$value ?><? } } ?></div>
-<? }
 }
 
 $console = new Console();
@@ -100,8 +71,17 @@ if (count($_POST)>0) {
   $console->parse_params($_POST);
   $console->run();
 }
-$console->render_output();
-$console->render_form();
-$console->render_structure();
-$console->render_css();
-$console->render_js();
+
+$output = explode("\n",file_get_contents($console->output_file)); ?>
+
+<style>
+  input { width:650px; height:25px; font-size: 14px; font-family: Monaco } 
+  #screen { width:650px; height:400px; font-size: 12px; font-family: Verdana; background: #e3e3ea; } 
+</style>
+<script type="text/javascript" src="vendor/jquery-1.9.0.min.js"></script>
+<script type="text/javascript" src="console/console.js"></script>
+<div id="screen"><? if($output) {foreach ($output as $key => $value) { ?><?=$value ?><? } } ?></div>
+<form method="post">
+  <input type="text" name="command" id="console">
+  <div id="autocomplete"></div>
+</form>
