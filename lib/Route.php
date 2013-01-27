@@ -5,7 +5,7 @@ class Router {
   function resources($model) {
     $this->add_route("GET",  $model, "/{$model}",            "index");
     $this->add_route("POST", $model, "/{$model}",            "create");
-    $this->add_route("GET",  $model, "/{$model}/new",        "build");
+    $this->add_route("GET",  $model, "/{$model}/add",        "add");
     $this->add_route("GET",  $model, "/{$model}/:id/edit",   "edit");
     $this->add_route("GET",  $model, "/{$model}/:id",        "show");
     $this->add_route("PUT",  $model, "/{$model}/:id",        "update");
