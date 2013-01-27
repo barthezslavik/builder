@@ -1,0 +1,25 @@
+<h2>Listing posts</h2>
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Content</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  <? if (count($this->articles) > 0) : ?>
+    <? foreach($this->articles as $article) : ?>
+    <tr>
+      <td><?=$article->title ?></td>
+      <td><?=$article->content ?></td>
+      <td><a href="/posts/<?=$post->id?>">Show</a></td>
+      <td><a href="/posts/<?=$post->id?>/edit">Edit</a></td>
+      <td><a href="/posts/<?=$post->id?>/delete">Delete</a></td>
+    </tr>
+    <? endforeach ?>
+  <? endif ?>
+</table>
+
+<br />
+
+<a href="/posts/new">New Post</a>
