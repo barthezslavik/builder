@@ -1,8 +1,9 @@
 <?php 
 
 ini_set('display_errors', "on");
-error_reporting(E_ALL)
+error_reporting(E_ALL);
 
+/*
 function __autoload($class_name) {
   if (preg_match("/Model/", $class_name))
     require '../lib/Model.php';
@@ -14,6 +15,7 @@ function __autoload($class_name) {
     require '../app/models/'.$class_name . '.php';
   }
 }
+ */
 
 require "../lib/Support.php";
 require "../lib/Route.php";
