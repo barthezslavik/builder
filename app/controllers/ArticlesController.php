@@ -26,10 +26,8 @@ class ArticlesController extends Controller {
   }
 
   function update() {
-    //${model} = new {capital};
-    //$this->{model} = ${model}->find($this->params["id"]);
-    //if ($this->{model}->update_attributes($this->params["{model}"]))
-    //  $this->redirect_to("index");
+    if (Article::find($this->params["id"])->update_attributes($this->params["article"]))
+      $this->redirect_to("index");
   }
 
   function add() {
@@ -37,4 +35,3 @@ class ArticlesController extends Controller {
   }
  
 }
-

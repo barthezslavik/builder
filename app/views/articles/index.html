@@ -1,24 +1,14 @@
 <table>
+  <? foreach($this->articles as $article) : ?>
   <tr>
-    <th>Name</th>
-    <th>Content</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <td><a href="/articles/<?=$article->id?>"><?=$article->name ?></a></td>
+    <td><?=$article->content ?></td>
+    <td><a href="/articles/<?=$article->id?>/edit">Edit</a></td>
+    <td><a href="/articles/<?=$article->id?>/delete">Delete</a></td>
   </tr>
-  <? if (count($this->articles) > 0) : ?>
-    <? foreach($this->articles as $article) : ?>
-    <tr>
-      <td><?=$article->name ?></td>
-      <td><?=$article->content ?></td>
-      <td><a href="/articles/<?=$article->id?>">Show</a></td>
-      <td><a href="/articles/<?=$article->id?>/edit">Edit</a></td>
-      <td><a href="/articles/<?=$article->id?>/delete">Delete</a></td>
-    </tr>
-    <? endforeach ?>
-  <? endif ?>
+  <? endforeach ?>
 </table>
 
 <br />
 
-<a href="/articles/add">New Post</a>
+<a href="/articles/add">Add Article</a>
