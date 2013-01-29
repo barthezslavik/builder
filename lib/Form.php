@@ -4,11 +4,11 @@ class Form {
 
   function __construct() {
     $form = Form::build(func_get_args());
-    $this->model = Support::singular($_REQUEST["controller"]);
+    $this->model = Support::singularize($_REQUEST["controller"]);
     $this->action = $_REQUEST["action"];
     $this->object = $form->object;
     $model = $this->model."[id]";
-    $action = "/".Support::plural($this->model);
+    $action = "/".Support::pluralize($this->model);
     $put = "";
     if (property_exists($form->object, "id")) {
       $id = implode("_",array($this->action, $this->model, $form->object->id));
