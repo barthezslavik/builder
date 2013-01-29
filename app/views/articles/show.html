@@ -1,12 +1,11 @@
 <p>
-  <b>Title:</b>
-    <?=$this->post->title ?>
+  <b>Name:</b>
+    <?=$this->article->name ?>
 </p>
 <p>
   <b>Content:</b>
-  <?=$this->post->content ?>
+  <?=$this->article->content ?>
 </p>
 <br />
 
-<a href="/posts/<?=$this->post->id?>/edit">Edit</a>
-<a href="/posts">Back</a>
+<a href="/articles/<?=$this->article->id?>/edit">Edit</a>

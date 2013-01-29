@@ -23,9 +23,9 @@ class ArticlesController extends Controller {
   }
 
   function create() {
-    //${model} = new {capital}($this->params["{model}"]);
-    //if (${model}->save())
-    //  $this->redirect_to("index");
+    $article = new Article($this->params["article"]);
+    if ($article->save())
+      $this->redirect_to("index");
   }
 
   function update() {

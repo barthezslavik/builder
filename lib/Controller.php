@@ -26,7 +26,7 @@ class Controller {
   }
 
   function redirect_to($action) {
-    header("Location: http://php/posts");
+    header("Location: {$_SERVER["HTTP_ORIGIN"]}/articles");
     $_REQUEST["action"] = $action;
     $this->{$action};
   }
