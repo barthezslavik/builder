@@ -57,7 +57,8 @@ BUTTON;
     $select = Form::build(func_get_args());
     $id = "{$this->model}_$select->object";
     $label = ucfirst($select->object);
-    $association = call_user_func(array($this->object, $select->object));
+    $name = ucfirst($select->object);
+    $association_items = call_user_func($name."::all");
     echo <<<LABEL
     <label for="$id">$label</label>\n
 LABEL;
@@ -69,7 +70,7 @@ SELECT;
     <option value="">$select->prompt</option>\n
 PROMPT;
     }
-    foreach($association as $item) {
+    foreach($association_items as $item) {
     if(property_exists($this->object, "id"))
       $selected = ($this->object->id == $item->id) ? 'selected="selected"' : "";
     else 
