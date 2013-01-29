@@ -11,15 +11,12 @@ class ArticlesController extends Controller {
   }
 
   function edit() {
-    //${model} = new {capital};
-    //$this->{model} = ${model}->find($this->params["id"]);
+    $this->article = Article::find($this->params["id"]);
   }
 
   function destroy() {
-    //${model} = new {capital};
-    //$this->{model} = ${model}->find($this->params["id"]);
-    //if ($this->{model}->destroy()) 
-    //  $this->redirect_to("index");
+    if (Article::find($this->params["id"])->delete())
+      $this->redirect_to("index");
   }
 
   function create() {

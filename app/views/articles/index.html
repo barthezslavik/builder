@@ -1,7 +1,6 @@
-<h2>Listing posts</h2>
 <table>
   <tr>
-    <th>Title</th>
+    <th>Name</th>
     <th>Content</th>
     <th></th>
     <th></th>
@@ -10,7 +9,7 @@
   <? if (count($this->articles) > 0) : ?>
     <? foreach($this->articles as $article) : ?>
     <tr>
-      <td><?=$article->title ?></td>
+      <td><?=$article->name ?></td>
       <td><?=$article->content ?></td>
       <td><a href="/articles/<?=$article->id?>">Show</a></td>
       <td><a href="/articles/<?=$article->id?>/edit">Edit</a></td>
