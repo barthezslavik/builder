@@ -67,6 +67,18 @@ class Generator {
     $this->add_to_routes('$router->resources("'.$this->plural.'");');
   }
 
+  function delete_scaffold($params) {
+    $this->init($params);
+    unlink("app/controllers/{$this->controller}Controller.php");
+    unlink("app/views/{$this->plural}/_form.html");
+    unlink("app/views/{$this->plural}/add.html");
+    unlink("app/views/{$this->plural}/edit.html");
+    unlink("app/views/{$this->plural}/index.html");
+    unlink("app/views/{$this->plural}/show.html");
+    rmdir("app/views/{$this->plural}");
+    unlink("app/models/{$this->model}.php");
+  }
+
   function models_structure() {}
 
   private function replace_in_template() {
@@ -80,7 +92,7 @@ class Generator {
   }
     
   private function add_to_routes($text) {
-    $file_name = "config/Routes.php";
+    $file_name = "config/routes.php";
     $lines = explode("\n",file_get_contents($file_name));
     if (!in_array($text, $lines)) {
       $lines[] = $text."\n";

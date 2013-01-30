@@ -51,7 +51,8 @@ class Console {
       $migration->run();  
     }
 
-    if ($params[0] == "b") {
+    if ($params[0] == "d") {
+      $this->generator->delete_scaffold($params);
     }
   }
 }
