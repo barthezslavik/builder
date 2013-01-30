@@ -20,12 +20,14 @@ class Generator {
   }
 
   function create_scaffold($params) {
-     $this->init($params);
-     $this->create_migration();
-     $this->create_model();
-     $this->create_controller();
-     $this->create_views();
-     $this->create_route();
+    $this->init($params);
+    $this->create_migration();
+    $this->create_model();
+    $this->create_controller();
+    $this->create_views();
+    $this->create_route();
+    $migration = new ActiveRecord\Migration();
+    $migration->run(); 
   }
 
   function create_model() {
@@ -46,17 +48,17 @@ class Generator {
     $this->fetch_file("scaffold/views/add.html");
     $this->replace_in_template("model", "plural", "singular");
     $this->write_file("app/views/{$this->plural}/add.html");
-    
+
     $this->fetch_file("scaffold/views/edit.html");
     $this->replace_in_template("controller", "model", "plural", "singular");
     $this->write_file("app/views/{$this->plural}/edit.html");
-    
+
     $this->generate_form();
-    
+
     $this->fetch_file("scaffold/views/index.html");
     $this->replace_in_template("controller", "model", "plural", "singular");
     $this->write_file("app/views/{$this->plural}/index.html");
-    
+
     $this->fetch_file("scaffold/views/show.html");
     $this->replace_in_template("controller", "model", "plural", "singular");
     $this->write_file("app/views/{$this->plural}/show.html");
@@ -96,20 +98,21 @@ class Generator {
     unlink("app/models/{$this->model}.php");
     rmdir("app/views/{$this->plural}");
     $this->remove_route('$router->resources("'.$this->plural.'");');
+    $this->remove_migration("create_{$this->plural}");
   }
 
   function models_structure() {}
 
-  private function replace_in_template() {
-    $args = func_get_args();
-    foreach($this->lines as $num => $line) {
-      foreach($args as $name) {
-        @$this->lines[$num] = str_replace("@".$name, $this->${name}, $this->lines[$num]);
+    private function replace_in_template() {
+      $args = func_get_args();
+      foreach($this->lines as $num => $line) {
+        foreach($args as $name) {
+          @$this->lines[$num] = str_replace("@".$name, $this->${name}, $this->lines[$num]);
+        }
+        $this->lines[$num] .= "\n"; 
       }
-      $this->lines[$num] .= "\n"; 
     }
-  }
-    
+
   private function add_route($route) {
     $lines = explode("\n",file_get_contents($this->routes));
     if (!in_array($route, $lines)) {
@@ -130,6 +133,15 @@ class Generator {
     $content = array_diff($lines,array(""));
     $content = implode("\n",$content);
     file_put_contents($this->routes, $content);
+  }
+
+  private function remove_migration($name) {
+    $files = scandir("db/migrate");
+    $files = array_slice($files, 2);
+    foreach($files as $file) {
+      if (preg_match("/{$name}/", $file))
+        unlink("db/migrate/{$file}");
+    }
   }
 
   private function write_file($file_name) {
