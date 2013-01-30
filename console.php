@@ -28,12 +28,13 @@ class Console {
 
   function parse_params($post) {
 
-    if($post["command"] != "") 
-    $history = file_get_contents($this->output_file);
-    $history .= "\n".$post["command"];
-    $unique = array_unique(explode("<br>",$history));
-    $updated_history = array_diff($unique,array(""));
-    file_put_contents($this->output_file, implode("\n",$updated_history));
+    if($post["command"] != "")  {
+      $history = file_get_contents($this->output_file);
+      $history .= "\n".$post["command"];
+      $unique = array_unique(explode("<br>",$history));
+      $updated_history = array_diff($unique,array(""));
+      file_put_contents($this->output_file, implode("\n",$updated_history));
+    }
     if($post["command"] == "clear")
       file_put_contents($this->output_file, "");
     $this->command = $post["command"];

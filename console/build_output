@@ -1,14 +1,35 @@
-s post name:string content:text
-m
-s user name:string
-s article name:string status:integer
-s star status:boolean
 
-s articleg name:string status:integer
-s test name:string content:text type_id:integer checked:boolean
-s article name:string content:text type_id:integer checked:booleans checked:boolean
 
-1
-2
-3
-s user name:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string
+s article a:string

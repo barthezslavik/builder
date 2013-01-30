@@ -24,6 +24,7 @@ class Generator {
      $this->create_model();
      $this->create_controller();
      $this->create_views();
+     $this->create_route();
   }
 
   function create_model() {
@@ -39,6 +40,8 @@ class Generator {
   }
 
   function create_views() {
+    $this->create_folder("app/views/{$this->plural}");
+
     $this->fetch_file("scaffold/views/add.html");
     $this->replace_in_template("model", "plural", "singular");
     $this->write_file("app/views/{$this->plural}/add.html");
@@ -60,6 +63,10 @@ class Generator {
     $this->write_file("app/views/{$this->plural}/show.html");
   }
 
+  function create_route() {
+    $this->add_to_routes('$router->resources("'.$this->plural.'");');
+  }
+
   function models_structure() {}
 
   private function replace_in_template() {
@@ -71,10 +78,25 @@ class Generator {
       $this->lines[$num] .= "\n"; 
     }
   }
+    
+  private function add_to_routes($text) {
+    $file_name = "config/Routes.php";
+    $lines = explode("\n",file_get_contents($file_name));
+    if (!in_array($text, $lines)) {
+      $lines[] = $text."\n";
+      $content = array_diff($lines,array(""));
+      $content = implode("\n",$content);
+      file_put_contents($file_name, $content);
+    }
+  }
 
   private function write_file($file_name) {
     file_put_contents($file_name, $this->lines);
-    chmod($file_name,0777);
+    chmod($file_name, 0777);
+  }
+
+  private function create_folder($folder_name) {
+    @mkdir($folder_name, 0777);
   }
 
   private function fetch_file($file_name) {

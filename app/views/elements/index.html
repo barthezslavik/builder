@@ -1,0 +1,16 @@
+<table>
+  <? foreach($this->elements as $element) : ?>
+  <tr>
+    <td><a href="/articles/<?=$element->id?>"><?=$article->name ?></a></td>
+    <td><?=$element->content ?></td>
+    <td><?=$element->user->name ?></td>
+    <td><a href="/articles/<?=$element->id?>/edit">Edit</a></td>
+    <td><a href="/articles/<?=$element->id?>/delete">Delete</a></td>
+  </tr>
+  <? endforeach ?>
+</table>
+
+<br />
+
+<a href="/elements/add">Add Element</a>
+
