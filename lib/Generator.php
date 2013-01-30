@@ -51,9 +51,7 @@ class Generator {
     $this->replace_in_template("controller", "model", "plural", "singular");
     $this->write_file("app/views/{$this->plural}/edit.html");
     
-    $this->fetch_file("scaffold/views/_form.html");
-    $this->replace_in_template("controller", "model", "plural", "singular");
-    $this->write_file("app/views/{$this->plural}/_form.html");
+    $this->generate_form();
     
     $this->fetch_file("scaffold/views/index.html");
     $this->replace_in_template("controller", "model", "plural", "singular");
@@ -62,6 +60,25 @@ class Generator {
     $this->fetch_file("scaffold/views/show.html");
     $this->replace_in_template("controller", "model", "plural", "singular");
     $this->write_file("app/views/{$this->plural}/show.html");
+  }
+
+  private function generate_form() {
+
+    $this->fields = [];
+    foreach($this->params as $item) {
+      $this->name = explode(":",$item)[0];
+      $this->type = explode(":",$item)[1];
+      $this->fetch_file("scaffold/views/form/{$this->type}.html");
+      $this->lines = array_diff($this->lines, array(""));
+      $this->replace_in_template("name");
+      $this->fields[] = $this->lines[0];
+    }
+    $this->fetch_file("scaffold/views/_form.html");
+    $this->fields = implode("<br><br>",$this->fields);
+    $this->lines[1] = $this->fields;
+    $this->lines = array_diff($this->lines, array(""));
+    $this->replace_in_template("singular");
+    $this->write_file("app/views/{$this->plural}/_form.html");
   }
 
   function create_route() {

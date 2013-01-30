@@ -1,9 +1,6 @@
 <? $f = new Form($this->article, "method:post") ?>
-<? $f->input("name", "placeholder:Enter title") ?>
-    <br><br>
-<? $f->input("content", "as:text") ?>
-    <br><br>
-<? $f->association("user", "prompt:Select user") ?>
-    <br><br>
-<? $f->button("submit") ?>
+<? $f->input("a", "placeholder:Enter a") ?>
+<br><br><? $f->input("b", "placeholder:Enter b") ?>
+<br><br><? $f->input("c", "as:text") ?>
 
+<br><br><? $f->button("submit") ?>

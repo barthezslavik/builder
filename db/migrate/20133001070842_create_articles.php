@@ -1,7 +1,7 @@
 <?php
 class CreateArticle extends ActiveRecord\Migration {
   function up() {
-    $this->create_table("articles", "a:string", "datetime");
+    $this->create_table("articles", "a:string", "b:integer", "c:text", "datetime");
   }
 
   function down() {

@@ -1,3 +1,6 @@
 s article a:string
 m
 d article
+s article a:string b:integer
+s article a:string b:integer c:text
+s article a:string b:integer c:text d:reference

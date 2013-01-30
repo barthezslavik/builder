@@ -10,7 +10,7 @@ class Form {
     $model = $this->model."[id]";
     $action = "/".Support::pluralize($this->model);
     $put = "";
-    if (array_key_exists("id", $this->object->attributes())) {
+    if ($this->object->attributes()["id"] != "") {
       $id = implode("_",array($this->action, $this->model, $form->object->id));
       $put = '<input name="_method" type="hidden" value="put">';
       $action = $action."/".$form->object->id;

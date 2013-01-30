@@ -26,8 +26,7 @@ class ArticlesController extends Controller {
   }
 
   function update() {
-    $article = Article::find($this->params["id"]);
-    if ($article->update_attributes($this->params["article"]))
+    if (Article::find($this->params["id"])->update_attributes($this->params["article"]))
       $this->redirect_to("index");
   }
 

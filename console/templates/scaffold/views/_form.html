@@ -1,8 +1,3 @@
 <? $f = new Form($this->@singular, "method:post") ?>
-<? $f->input("name", "placeholder:Enter title") ?>
-    <br><br>
-<? $f->input("content", "as:text") ?>
-    <br><br>
-<? $f->association("user", "prompt:Select user") ?>
-    <br><br>
-<? $f->button("submit") ?>
+@fields
+<br><br><? $f->button("submit") ?>
