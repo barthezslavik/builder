@@ -1,44 +1,37 @@
 <?php 
 
-class {name}Controller extends Controller {
+class @controllerController extends Controller {
 
   function index() {
-    ${model} = new {capital};
-    $this->{plural} = ${model}->all();
+    $this->@plural = @model::all();
   }
 
   function show() {
-    ${model} = new {capital};
-    $this->{model} = ${model}->find($this->params["id"]);
+    $this->@singular = @model::find($this->params["id"]);
   }
 
   function edit() {
-    ${model} = new {capital};
-    $this->{model} = ${model}->find($this->params["id"]);
+    $this->@singular = @model::find($this->params["id"]);
   }
 
   function destroy() {
-    ${model} = new {capital};
-    $this->{model} = ${model}->find($this->params["id"]);
-    if ($this->{model}->destroy()) 
+    if (@model::find($this->params["id"])->delete())
       $this->redirect_to("index");
   }
 
   function create() {
-    ${model} = new {capital}($this->params["{model}"]);
-    if (${model}->save())
+    $@singular = new @model($this->params["article"]);
+    if ($@singular->save())
       $this->redirect_to("index");
   }
 
   function update() {
-    ${model} = new {capital};
-    $this->{model} = ${model}->find($this->params["id"]);
-    if ($this->{model}->update_attributes($this->params["{model}"]))
+    if (@model::find($this->params["id"])->update_attributes($this->params["@singular"]))
       $this->redirect_to("index");
   }
 
-  function build() {
-    $this->{model} = new {capital};
+  function add() {
+    $this->@singular = new @model;
   }
+ 
 }
-

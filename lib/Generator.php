@@ -1,20 +1,28 @@
 <?php 
 
+require "Support.php";
+
 class Generator {
-  function create_migration($params) {
+  function init($params) {
+    $this->plural = $this->table = Support::pluralize($params[1]);
+    $this->model = ucfirst(Support::singularize($this->table));
+    $this->singular = Support::singularize($this->table);
+    $this->controller = ucfirst($this->table);
+    $this->params = array_slice($params,2);
+  }
+
+  function create_migration() {
     $this->fetch_file("scaffold/migration.php");
-    $this->table = ActiveRecord\Inflector::instance()->tableize($params[1]);
-    $this->plural = ActiveRecord\Inflector::instance()->tableize($params[1]);
-    $this->model = ucfirst(ActiveRecord\Utils::singularize($this->table));
-    $params = array_slice($params,2);
-    $this->columns_with_types = '"'.join('", "', $params).'"';
+    $this->columns_with_types = '"'.join('", "', $this->params).'"';
     $this->replace_in_template("model","table","columns_with_types");
     $this->write_file("db/migrate/".date('Ydmhis')."_create_{$this->table}.php");
   }
 
   function create_scaffold($params) {
-     $this->create_migration($params);
+     $this->init($params);
+     $this->create_migration();
      $this->create_model();
+     $this->create_controller();
   }
 
   function create_model() {
@@ -25,8 +33,8 @@ class Generator {
 
   function create_controller() {
     $this->fetch_file("scaffold/controller.php");
-    $this->replace_in_template("model","plural");
-    $this->write_file("app/controllers/{$this->model}Controller.php");
+    $this->replace_in_template("controller", "model", "plural", "singular");
+    $this->write_file("app/controllers/{$this->controller}Controller.php");
   }
 
   function models_structure() {}
