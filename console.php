@@ -30,10 +30,10 @@ class Console {
 
     if($post["command"] != "") 
     $history = file_get_contents($this->output_file);
-    $history .= "<br>".$post["command"];
+    $history .= "\n".$post["command"];
     $unique = array_unique(explode("<br>",$history));
     $updated_history = array_diff($unique,array(""));
-    file_put_contents($this->output_file, implode("<br>",$updated_history));
+    file_put_contents($this->output_file, implode("\n",$updated_history));
     if($post["command"] == "clear")
       file_put_contents($this->output_file, "");
     $this->command = $post["command"];
@@ -74,7 +74,7 @@ $output = explode("\n",file_get_contents($console->output_file)); ?>
 <script type="text/javascript" src="vendor/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="console/console.js"></script>
 <div id="left">
-  <div id="screen"><? if($output) {foreach ($output as $key => $value) { ?><?=$value ?><? } } ?></div>
+  <div id="screen"><? if($output) {foreach ($output as $key => $value) { ?><?=$value."<br>" ?><? } } ?></div>
   <form method="post">
     <input type="text" name="command" id="console">
     <div id="autocomplete"></div>

@@ -1,1 +1,14 @@
-s post name:string content:text<br>m<br>s user name:string<br>s article name:string status:integer<br>s star status:boolean<br>&#1100;<br>s articleg name:string status:integer<br>s test name:string content:text type_id:integer checked:boolean<br>s article name:string content:text type_id:integer checked:booleans article name:string content:text type_id:integer checked:boolean12<br>1<br>2
+s post name:string content:text
+m
+s user name:string
+s article name:string status:integer
+s star status:boolean
+
+s articleg name:string status:integer
+s test name:string content:text type_id:integer checked:boolean
+s article name:string content:text type_id:integer checked:booleans checked:boolean
+
+1
+2
+3
+s user name:string
