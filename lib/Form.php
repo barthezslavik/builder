@@ -71,8 +71,9 @@ SELECT;
 PROMPT;
     }
     foreach($association_items as $item) {
-    if(property_exists($this->object, "id"))
-      $selected = ($this->object->id == $item->id) ? 'selected="selected"' : "";
+    
+    if (array_key_exists("id", $this->object->attributes()))
+      $selected = ($this->object->user_id == $item->id) ? 'selected="selected"' : "";
     else 
       $selected = "";
     echo <<<OPTIONS

@@ -3,6 +3,7 @@
   <tr>
     <td><a href="/articles/<?=$article->id?>"><?=$article->name ?></a></td>
     <td><?=$article->content ?></td>
+    <td><?=@$article->user->name ?></td>
     <td><a href="/articles/<?=$article->id?>/edit">Edit</a></td>
     <td><a href="/articles/<?=$article->id?>/delete">Delete</a></td>
   </tr>

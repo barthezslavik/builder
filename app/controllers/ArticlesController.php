@@ -1,37 +1,37 @@
 <?php 
 
-class ArticlesController extends Controller {
+class @controllerController extends Controller {
 
   function index() {
-    $this->articles = Article::all();
+    $this->@plural = @model::all();
   }
 
   function show() {
-    $this->article = Article::find($this->params["id"]);
+    $this->@singular = @model::find($this->params["id"]);
   }
 
   function edit() {
-    $this->article = Article::find($this->params["id"]);
+    $this->@singular = @model::find($this->params["id"]);
   }
 
   function destroy() {
-    if (Article::find($this->params["id"])->delete())
+    if (@model::find($this->params["id"])->delete())
       $this->redirect_to("index");
   }
 
   function create() {
-    $article = new Article($this->params["article"]);
-    if ($article->save())
+    $@singular = new @model($this->params["article"]);
+    if ($@singular->save())
       $this->redirect_to("index");
   }
 
   function update() {
-    if (Article::find($this->params["id"])->update_attributes($this->params["article"]))
+    if (@model::find($this->params["id"])->update_attributes($this->params["@singular"]))
       $this->redirect_to("index");
   }
 
   function add() {
-    $this->article = new Article;
+    $this->@singular = new @model;
   }
  
 }
