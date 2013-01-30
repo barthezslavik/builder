@@ -9,6 +9,7 @@ class Generator {
     $this->singular = Support::singularize($this->table);
     $this->controller = ucfirst($this->table);
     $this->params = array_slice($params,2);
+    $this->routes = "config/routes.php";
   }
 
   function create_migration() {
@@ -64,7 +65,7 @@ class Generator {
   }
 
   function create_route() {
-    $this->add_to_routes('$router->resources("'.$this->plural.'");');
+    $this->add_route('$router->resources("'.$this->plural.'");');
   }
 
   function delete_scaffold($params) {
@@ -75,8 +76,9 @@ class Generator {
     unlink("app/views/{$this->plural}/edit.html");
     unlink("app/views/{$this->plural}/index.html");
     unlink("app/views/{$this->plural}/show.html");
-    rmdir("app/views/{$this->plural}");
     unlink("app/models/{$this->model}.php");
+    rmdir("app/views/{$this->plural}");
+    $this->remove_route('$router->resources("'.$this->plural.'");');
   }
 
   function models_structure() {}
@@ -91,15 +93,26 @@ class Generator {
     }
   }
     
-  private function add_to_routes($text) {
-    $file_name = "config/routes.php";
-    $lines = explode("\n",file_get_contents($file_name));
-    if (!in_array($text, $lines)) {
-      $lines[] = $text."\n";
+  private function add_route($route) {
+    $lines = explode("\n",file_get_contents($this->routes));
+    if (!in_array($route, $lines)) {
+      $lines[] = $route."\n";
       $content = array_diff($lines,array(""));
       $content = implode("\n",$content);
-      file_put_contents($file_name, $content);
+      file_put_contents($this->routes, $content);
     }
+  }
+
+  private function remove_route($route) {
+    $lines = explode("\n",file_get_contents($this->routes));
+    foreach($lines as $key => $value) {
+      if($value == $route) {
+        unset($lines[$key]);
+      }
+    }
+    $content = array_diff($lines,array(""));
+    $content = implode("\n",$content);
+    file_put_contents($this->routes, $content);
   }
 
   private function write_file($file_name) {
