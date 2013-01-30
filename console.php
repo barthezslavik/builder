@@ -31,7 +31,7 @@ class Console {
     if($post["command"] != "")  {
       $history = file_get_contents($this->output_file);
       $history .= "\n".$post["command"];
-      $unique = array_unique(explode("<br>",$history));
+      $unique = array_unique(explode("\n",$history));
       $updated_history = array_diff($unique,array(""));
       file_put_contents($this->output_file, implode("\n",$updated_history));
     }
