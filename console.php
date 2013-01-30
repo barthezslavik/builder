@@ -62,13 +62,18 @@ if (count($_POST)>0) {
 $output = explode("\n",file_get_contents($console->output_file)); ?>
 
 <style>
-  input { width:650px; height:25px; font-size: 14px; font-family: Monaco } 
-  #screen { width:650px; height:400px; font-size: 12px; font-family: Verdana; background: #e3e3ea; } 
+  #left { float: left; width: 660px; }
+  input { width:650px; height:25px; font-size: 14px; font-family: Monaco; float: left; } 
+  #screen { width:650px; height:400px; font-size: 12px; font-family: Verdana; background: #e3e3ea; float: left; } 
+  #visual { width:650px; height:400px; font-size: 12px; font-family: Verdana; background: #e3e3ea; float: right; } 
 </style>
 <script type="text/javascript" src="vendor/jquery-1.9.0.min.js"></script>
 <script type="text/javascript" src="console/console.js"></script>
-<div id="screen"><? if($output) {foreach ($output as $key => $value) { ?><?=$value ?><? } } ?></div>
-<form method="post">
-  <input type="text" name="command" id="console">
-  <div id="autocomplete"></div>
-</form>
+<div id="left">
+  <div id="screen"><? if($output) {foreach ($output as $key => $value) { ?><?=$value ?><? } } ?></div>
+  <form method="post">
+    <input type="text" name="command" id="console">
+    <div id="autocomplete"></div>
+  </form>
+</div>
+<div id="visual">1111111</div>
