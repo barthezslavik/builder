@@ -23,6 +23,7 @@ class Generator {
      $this->create_migration();
      $this->create_model();
      $this->create_controller();
+     $this->create_views();
   }
 
   function create_model() {
@@ -35,6 +36,28 @@ class Generator {
     $this->fetch_file("scaffold/controller.php");
     $this->replace_in_template("controller", "model", "plural", "singular");
     $this->write_file("app/controllers/{$this->controller}Controller.php");
+  }
+
+  function create_views() {
+    $this->fetch_file("scaffold/views/add.html");
+    $this->replace_in_template("model", "plural", "singular");
+    $this->write_file("app/views/{$this->plural}/add.html");
+    
+    $this->fetch_file("scaffold/views/edit.html");
+    $this->replace_in_template("controller", "model", "plural", "singular");
+    $this->write_file("app/views/{$this->plural}/edit.html");
+    
+    $this->fetch_file("scaffold/views/_form.html");
+    $this->replace_in_template("controller", "model", "plural", "singular");
+    $this->write_file("app/views/{$this->plural}/_form.html");
+    
+    $this->fetch_file("scaffold/views/index.html");
+    $this->replace_in_template("controller", "model", "plural", "singular");
+    $this->write_file("app/views/{$this->plural}/index.html");
+    
+    $this->fetch_file("scaffold/views/show.html");
+    $this->replace_in_template("controller", "model", "plural", "singular");
+    $this->write_file("app/views/{$this->plural}/show.html");
   }
 
   function models_structure() {}
