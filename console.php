@@ -29,7 +29,11 @@ class Console {
   function parse_params($post) {
 
     if($post["command"] != "") 
-      file_put_contents($this->output_file, $post["command"]."<br>", FILE_APPEND);
+    $history = file_get_contents($this->output_file);
+    $history .= "<br>".$post["command"];
+    $unique = array_unique(explode("<br>",$history));
+    $updated_history = array_diff($unique,array(""));
+    file_put_contents($this->output_file, implode("<br>",$updated_history));
     if($post["command"] == "clear")
       file_put_contents($this->output_file, "");
     $this->command = $post["command"];
